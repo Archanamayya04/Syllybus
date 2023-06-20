@@ -1,0 +1,88 @@
+--------------------------------in both master and slave nodes ------------------------
+
+vi a.sh
+
+
+#!/bin/bash
+# Swap memory
+swapoff -a
+# Install Docker
+sudo apt-get update
+sudo apt-get install -y\
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+# Install Kubernetes
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+#sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubelet=1.21.1-00 kubeadm=1.21.1-00 kubectl=1.21.1-00 #--allow-change-held-packages
+sudo apt-mark hold kubelet kubeadm kubectl
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# CNI Plugin Installation: (run in master node)
+
+
+
+ kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+
+----------------------------------------------
+in master--
+
+ mkdir -p $HOME/.kube
+ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+------------------------in slave-----------------------------------------------------
+sudo kubeadm join 172.31.5.110:6443 --token 8v59wd.z3zzf3phsu105kpy \
+        --discovery-token-ca-cert-hash sha256:9eedb4fad24a8a3f0d8a5289a6676d59815363e47f52627a33bf9357f6fa24ee
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+in master 
+
+
+
+       vi a.sh
+    2  sh a.sh
+    3  sudo kubeadm init
+    4  history
+    5  kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+    6  kubectl get nodes
+    7  history
+       sudo hostnamectl set-hostname kmaster
+
+
+
+in  slave
+
+    1   vi a.sh
+    2  sh a.sh
+    3  sudo kubeadm join 172.31.5.110:6443 --token 8v59wd.z3zzf3phsu105kpy         --discovery-token-ca-cert-hash sha256:9eedb4fad24a8a3f0d8a5289a6676d59815363e47f52627a33bf9357f6fa24ee
+
+sudo hostnamectl set-hostname slave
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+

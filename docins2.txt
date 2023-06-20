@@ -1,0 +1,55 @@
+version : '3'
+
+services:
+
+  web:
+
+    image: nginx
+
+    ports:
+
+      -  4000:80
+
+  
+
+  db:
+
+    image: redis
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+1  docker pull ubuntu
+    2  docker ps
+    3  docker images
+    4  docker run -it -d ubuntu
+    5  docker ps
+    6  docker start c04d66bcea89
+    7  docker commit c04d66bcea89
+    8  docker commit c04d66bcea89 archanamayya04/thursday
+    9  docker login
+   10  docker push archanamayya04/thursday
+   11  docker exec c04d66bcea89 bash
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+TOMCAT 
+----------------------------------------------------------------------------------------------------------------------------
+ 1  wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz
+    2  ls
+    3  tar -zvxf apache-tomcat-9.0.75.tar.gz
+    4  ls
+    5  cd apache-tomcat-9.0.75
+    6  ls
+    7  cd bin
+    8  ls
+    9  yum install java -y
+   10  ls
+   11  ./startup.sh
+   12  history
+

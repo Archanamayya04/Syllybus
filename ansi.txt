@@ -1,0 +1,20 @@
+Tom cat 
+
+useradd ansible
+    2  passwd ansible
+    3  visod
+    4  visudo
+    5  vi /etc/ssh/sshd_config
+    6  systemctl restart sshd
+    7  systemctl status sshd
+    8  cat /etc/shadow
+    9  history
+play.yml
+---
+- hosts: all
+  become: true
+  tasks:
+- name: copy war file in ansible user
+  copy:
+    src: /home/ansible/project-2-webapp.war
+    dest: /root/apache-tomcat-9.0.76/webapps

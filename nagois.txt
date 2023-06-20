@@ -1,0 +1,2 @@
+yum -y install httpd php gcc glibc-common wget perl gd-devel unzip zip
+useradd 

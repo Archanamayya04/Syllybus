@@ -1,0 +1,56 @@
+Administrator
+
+
+GJfa4z=ApRU*gSO=x6x55MpzW9%pL5KB
+
+
+
+
+
+Linux Commands ----
+
+sudo su -
+
+yum update
+
+y
+
+yum install httpd
+
+y
+
+systemctl status httpd
+
+systemctl start httpd
+
+
+
+
+
+
+
+
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd 
+
+yum update -y
+yum install -y firewalld
+systemctl start firewalld
+systemctl enable firewalld 
+
+
+mmm123@@
+aaa123@@
+
+
+
+
+
+
+
+
+
+
